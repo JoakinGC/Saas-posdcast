@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { sidebarLinks } from '../../constants'
+import { sidebarLinks } from "@/constants"
 import { usePathname, useRouter } from 'next/navigation'
 
 import { cn } from '@/lib/utils'
