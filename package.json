@@ -9,14 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.13.0",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "convex": "^1.13.2",
     "lucide-react": "^0.414.0",
-    "next": "14.2.4",
+    "next": "14.2.25",
     "react": "^18",
     "react-dom": "^18",
+    "svix": "^1.63.1",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },
