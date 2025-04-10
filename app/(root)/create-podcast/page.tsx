@@ -45,7 +45,7 @@ const CreatePodcast = ()=>{
   const [audioStorageId, setAudioStorageId] = useState<Id<"_storage">|null>(null);
   const [audioDuration, setAudioDuration] = useState(0)
 
-  const [voiceType, setVoiceType] = useState<string | null>(null);
+  const [voiceType, setVoiceType] = useState<string>("");
   const [voicePrompt, setVoicePrompt] = useState('');
 
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
@@ -77,10 +77,10 @@ const CreatePodcast = ()=>{
           name="podcastTitle"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-2.5">
-              <FormLabel className="text-16 font-bold text-white-1">Username</FormLabel>
+              <FormLabel className="text-16 font-bold text-white-1">Title</FormLabel>
               <FormControl>
                 <Input 
-                className="input-class focus-visible:ring-orange-1"
+                className="input-class focus-visible:ring-offset-orange-1"
                 placeholder="Podcast" {...field} />
               </FormControl>
               <FormMessage 
@@ -129,7 +129,7 @@ const CreatePodcast = ()=>{
               <FormLabel className="text-16 font-bold text-white-1">Description</FormLabel>
               <FormControl>
                 <Textarea
-                className="input-class focus-visible:ring-orange-1"
+                className="input-class focus-visible:ring-offset-orange-1"
                 placeholder="Write a short podcast description" {...field} />
               </FormControl>
               <FormMessage 
@@ -140,7 +140,15 @@ const CreatePodcast = ()=>{
           </div>
         </div>
         <div className="flex flex-col pt-10">
-          <GeneratePodcast/>
+          <GeneratePodcast
+            setAudioStorageId={setAudioStorageId}
+            setAudio={setAudioUrl}
+            voiceType={voiceType}
+            audio={audioUrl}
+            voicePrompt={voicePrompt}
+            setVoicePrompt={setVoicePrompt}
+            setAudioDuration={setAudioDuration}
+          />
 
 
           <GenerateThumbnail />
