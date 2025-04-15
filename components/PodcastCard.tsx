@@ -1,13 +1,14 @@
+import { Id } from "@/convex/_generated/dataModel"
 import Image from "next/image"
 
 
 const PodcastCard = ({imgUrl,title,description,podcastId}
     :
     {
-        imgUrl:string,
+        imgUrl:string|undefined,
         title:string,
         description:string,
-        podcastId:number,
+        podcastId:Id<"podcasts">
     }
 ) =>{
     return(
@@ -15,7 +16,7 @@ const PodcastCard = ({imgUrl,title,description,podcastId}
         <figure className="flex flex-col gap-2">
             <Image
                 alt={title}
-                src={imgUrl}
+                src={imgUrl!}
                 width={174}
                 height={174}
                 className="aspect-square h-fit w-full rounded-xl 2xl:size-[200px]"
