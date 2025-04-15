@@ -16,7 +16,7 @@ export default defineSchema({
         voicePrompt: v.string(),
         imagePrompt: v.string(),
         voiceType: v.string(),
-        audioDuration: v.string(),
+        audioDuration: v.number(),
         view: v.number(),
     }).searchIndex('search_autor',{searchField:'author'})
     .searchIndex('search_title',{searchField:'podcastTitle'})

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -28,6 +28,11 @@ import GeneratePodcast from "@/components/GeneratePodcast";
 import GenerateThumbnail from "@/components/GenerateThumbnail";
 import { Loader } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
+import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useRouter } from "next/navigation";
+
 
 const voiceCategories = ['alloy','shimmer','nova','echo','fable','onyx']
 
@@ -37,11 +42,12 @@ const formSchema = z.object({
 })
 
 const CreatePodcast = ()=>{
+  const router = useRouter();
   const [imagePrompt, setImagePrompt] = useState<string>('');
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage">|null>(null);
   const [imageUrl, setImageUrl] = useState('')
 
-  const [audioUrl, setAudioUrl] = useState('')
+  const [audioUrl, setAudioUrl] = useState<string>('')
   const [audioStorageId, setAudioStorageId] = useState<Id<"_storage">|null>(null);
   const [audioDuration, setAudioDuration] = useState(0)
 
@@ -49,6 +55,9 @@ const CreatePodcast = ()=>{
   const [voicePrompt, setVoicePrompt] = useState('');
 
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
+  const {toast} = useToast();
+
+  const createPodcast = useMutation(api.podcasts.createPodcast);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,11 +68,46 @@ const CreatePodcast = ()=>{
     },
   })
  
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      setSubmitting(true);
+      if(!audioUrl || !imageUrl || !voiceType){
+        toast({
+          title:'Please generate audio and image',
+        })
+        setSubmitting(false);
+        throw new Error('Please generate audio and image');
+      }
+
+      const podcast = await createPodcast({
+        podcastTitle: data.podcastTitle,
+        podcastDescription: data.podcastDescription,
+        audioUrl,
+        imageUrl,
+        voiceType,
+        imagePrompt,
+        voicePrompt,
+        view:0,
+        audioDuration,
+        audioStorageId:audioStorageId!,
+        imageStorageId:imageStorageId!,
+
+      })
+
+      toast({
+        title:'Podcast created',
+      })
+
+      setSubmitting(false);
+      router.push('/');
+    } catch (error) {
+      console.error(error)
+      toast({
+        title:'Error',
+        variant:'destructive'
+      })
+      setSubmitting(false);
+    }
   }
 
   return (
