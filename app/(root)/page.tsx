@@ -6,7 +6,7 @@ import { api } from '@/convex/_generated/api';
 
 
 const Home = ()=>{
-  const trendingPodcast = useQuery( api.podcasts.getTrendingPodcast);
+  const trendingPodcast = useQuery( api.podcasts.getTrendingPodcasts);
   return(
     <div className='mt-9 flex flex-col gap-9'>
       <section className='flex flex-col gap-5'>
@@ -17,9 +17,9 @@ const Home = ()=>{
           return (
             <PodcastCard
               key={_id}
-              imgUrl={imageUrl}
+              imgUrl={imageUrl!}
               title={podcastTitle}
-              description={podcastTitle}
+              description={podcastDescription}
               podcastId={_id}
             />
           );

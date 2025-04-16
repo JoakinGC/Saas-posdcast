@@ -9,6 +9,10 @@ const nextConfig = {
             {
                 protocol:'https',
                 hostname:'colorless-bear-215.convex.cloud'
+            },
+            {
+                protocol:'https',
+                hostname:'img.clerk.com'
             }
         ]
     }
