@@ -87,7 +87,7 @@ const CreatePodcast = ()=>{
         voiceType,
         imagePrompt,
         voicePrompt,
-        view:0,
+        views:0,
         audioDuration,
         audioStorageId:audioStorageId!,
         imageStorageId:imageStorageId!,
