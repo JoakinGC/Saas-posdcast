@@ -4,18 +4,20 @@ import React, { useEffect, useState } from 'react'
 import { Input } from './ui/input'
 import Image from 'next/image'
 import { useRouter,usePathname } from 'next/navigation'
+import { useDebounce } from "@/lib/useDebounce";
 
 const SearchBar = () => {
     const [search, setSearch] = useState("");
     const router = useRouter();
     const pathName = usePathname();
+    const debouncedvalue = useDebounce(search,500);
 
     useEffect(() =>{
-        if(search){
+        if(debouncedvalue){
             router.push(`/discover?search=${search}`)
-        }else if(!search && pathName === "discover")
+        }else if(!debouncedvalue && pathName === "discover")
             router.push("/discover")
-    },[router,pathName,search])
+    },[router,pathName,debouncedvalue])
     return (
         <div className="relative mt-8 block">
             <Input 
