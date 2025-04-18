@@ -3,6 +3,7 @@ import MobileNav from "@/components/MovileNav";
 import RigthSidebar from "@/components/RightSidebar";
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster"
+import PodcastPlayer from "@/components/PodcastPlayer";
 
 
 
@@ -38,6 +39,8 @@ export default function RootLayout({
             </section>
             <RigthSidebar/>
         </main>
+
+        <PodcastPlayer/>
     </div>
   );
 }

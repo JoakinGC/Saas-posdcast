@@ -23,7 +23,6 @@ const AudioProvider = ({children}:{children:React.ReactNode}) =>{
      )
 }
 
-
 export const useAudio = () =>{
     const context = useContext(AudioContext);
 
