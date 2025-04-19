@@ -14,11 +14,10 @@ import { cn } from "@/lib/utils";
 const RigthSidebar = ()=>{
   const {user} = useUser();
   const topPodcasters = useQuery(api.users.getTopUserByPodcastCount);
-
+  const {audio} = useAudio();
   const router = useRouter();
 
   if(!topPodcasters) return <LoaderSpinner/>
- const {audio} = useAudio();
    return (
      <section className={cn("right_sidebar h-[calc(100vh-5px]",{
        "h-[calc(100vh-116px]": audio?.audioUrl
