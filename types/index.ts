@@ -40,7 +40,7 @@ export interface PodcastProps {
   imagePrompt: string | null;
   voiceType: string;
   audioDuration: number;
-  views: number;
+  view: number;
 }
 
 export interface ProfilePodcastProps {
