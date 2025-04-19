@@ -18,7 +18,7 @@ const ProfilePage = ({
   const user = useQuery(api.users.getUserById, {
     clerkId: params.profileId,
   });
-  const podcastsData = useQuery(api.podcasts.getPodcastByAuthorId, {
+  const podcastsData= useQuery(api.podcasts.getPodcastByAuthorId, {
     authorId: params.profileId,
   });
 
